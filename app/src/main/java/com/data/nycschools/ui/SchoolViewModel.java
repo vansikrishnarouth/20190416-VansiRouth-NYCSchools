@@ -27,10 +27,14 @@ public class SchoolViewModel extends ViewModel {
     public ObservableBoolean empty = new ObservableBoolean(true);
     SnackBarMessage snackBarMessage = new SnackBarMessage();
     private RepoManager repoManager;
-    public ObservableList<School> schools = new ObservableArrayList<>();
+    private ObservableList<School> schools = new ObservableArrayList<>();
 
     public SchoolViewModel(RepoManager repoManager){
         this.repoManager = repoManager;
+    }
+
+    public ObservableList<School> getSchools() {
+        return schools;
     }
 
     public void loadSchoolList() {

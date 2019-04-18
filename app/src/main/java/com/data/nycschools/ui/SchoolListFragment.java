@@ -40,7 +40,7 @@ public class SchoolListFragment extends Fragment {
 
     private void setupAdapter() {
         RecyclerView recyclerView =  fragBinding.recyclerView;
-        SchoolListAdapter adapter = new SchoolListAdapter(listener , listener.getViewModel().schools);
+        SchoolListAdapter adapter = new SchoolListAdapter(listener , listener.getViewModel().getSchools());
         recyclerView.setHasFixedSize(true);
         DividerItemDecoration itemDecor = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecor.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.divider_decorator));
@@ -49,11 +49,12 @@ public class SchoolListFragment extends Fragment {
     }
 
     private void loadSchoolList() {
-        if(Utils.isConnected(getContext())) {
-            listener.getViewModel().loadSchoolList();
-        }
-        else{
-            listener.getViewModel().snackBarMessage.setValue(R.string.internet_not_connected);
+        if(listener.getViewModel().getSchools().isEmpty()) {
+            if (Utils.isConnected(getContext())) {
+                listener.getViewModel().loadSchoolList();
+            } else {
+                listener.getViewModel().snackBarMessage.setValue(R.string.internet_not_connected);
+            }
         }
     }
 

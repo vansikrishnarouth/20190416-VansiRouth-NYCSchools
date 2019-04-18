@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements
     ViewModelFactory viewModelFactory;
     View view;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +31,9 @@ public class MainActivity extends AppCompatActivity implements
         inject();
         viewModel = obtainViewModel();
         setupSnackBar();
-        loadParentFragment();
+        if(getSupportFragmentManager().findFragmentByTag(Constants.TAG_LIST) == null) {
+            loadParentFragment();
+        }
     }
 
     private void inject() {
