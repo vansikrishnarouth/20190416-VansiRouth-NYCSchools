@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="school"
+            type="com.data.nycschools.entity.School"/>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+    </data>
+    <RelativeLayout
+        android:id="@+id/holderLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_12"
+        android:onClick="@{clickListener}">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{school.schoolName}"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:id="@+id/city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginTop="@dimen/margin_4"
+                android:text="@{school.cityName}"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_14" />
+
+            <TextView
+                android:id="@+id/grades"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/name"
+                android:layout_marginTop="@dimen/margin_4"
+                android:text="@{school.schoolGrades}"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_14" />
+
+    </RelativeLayout>
+</layout>

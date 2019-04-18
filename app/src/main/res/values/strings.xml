@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">NYC Schools</string>
+    <string name="no_data">No data available</string>
+    <string name="internet_not_connected">Internet connection not available. Please try again later.</string>
+    <string name="extra_curricular_activities_label">Extra Curricular Activities</string>
+    <string name="sat_scores_label">SAT Scores</string>
+    <string name="maths_label">Maths</string>
+    <string name="reading_label">Reading</string>
+    <string name="writing_label">Writing</string>
+    <string name="msg_data_load_failed">Sorry. School data load failed.</string>
+    <string name="msg_scores_load_failed">Sorry. SAT scores load failed.</string>
+    <string name="msg_no_support_apps">No supported apps found to complete this action.</string>
+    <string name="msg_website_not_available">School website not available for now.</string>
+    <string name="msg_unexpected_error">Something went wrong during this action.</string>
+    <string name="grant_call_permission_msg">App needs the call permission to make the call. Please grant the permission and try again.</string>
+    <string name="msg_phone_not_available">School phone number not available for now.</string>
+
+</resources>

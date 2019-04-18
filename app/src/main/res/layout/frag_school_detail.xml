@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="websiteClickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="phoneClickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
+            name="school"
+            type="com.data.nycschools.entity.School"/>
+        <variable
+            name="viewModel"
+            type="com.data.nycschools.ui.SchoolViewModel"/>
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadeScrollbars="true"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/detailsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_4"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/infoLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:layout_marginLeft="@dimen/margin_4"
+                    android:layout_marginRight="@dimen/margin_4"
+                    android:gravity="center_vertical">
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginRight="@dimen/margin_4"
+                        android:layout_toLeftOf="@+id/phoneNumber"
+                        android:text="@{school.schoolName}"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_16"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/website"
+                        android:layout_marginRight="@dimen/margin_8"
+                        android:background="@drawable/circular_bg"
+                        android:src="@drawable/ic_call_white"
+                        android:onClick="@{phoneClickListener}"/>
+
+                    <ImageView
+                        android:id="@+id/website"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/circular_bg"
+                        android:src="@drawable/ic_web_white"
+                        android:onClick="@{websiteClickListener}"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:layout_marginLeft="@dimen/margin_4"
+                    android:layout_marginRight="@dimen/margin_4"
+                    android:text="@{school.getFormattedAddress}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_14" />
+
+
+                <RelativeLayout
+                    android:id="@+id/infoLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_4"
+                    android:layout_marginLeft="@dimen/margin_4"
+                    android:layout_marginRight="@dimen/margin_4"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/totalStudents"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@{school.getTotalStudents}"/>
+
+                    <TextView
+                        android:id="@+id/attendance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/text_size_14"
+                        android:text="@{school.getAttendanceRate}"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/satScoresLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_2"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_8"
+                android:paddingTop="@dimen/margin_4"
+                android:paddingBottom="@dimen/margin_4"
+                android:paddingRight="@dimen/margin_4"
+                android:text="@string/sat_scores_label"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/scoresEmptyLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/no_data"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/text_size_16"
+                    android:visibility="@{school.satScoresNonEmpty? View.GONE: View.VISIBLE}" />
+
+                <LinearLayout
+                    android:id="@+id/scoresLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/margin_8"
+                    android:visibility="@{school.satScoresNonEmpty? View.VISIBLE: View.GONE}">
+
+                    <RelativeLayout
+                        android:id="@+id/mathScoreLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/mathScoreLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@string/maths_label"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/mathScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@{school.mathScore}"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/readingScoreLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_4"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/readingScoreLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@string/reading_label"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/readingScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@{school.readingScore}"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/writingScoreLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_4"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/writingScoreLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@string/writing_label"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14" />
+
+                        <TextView
+                            android:id="@+id/writingScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="@dimen/margin_2"
+                            android:text="@{school.writingScore}"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:visibility="@{viewModel.scoreLoading? View.VISIBLE: View.GONE}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/margin_64"
+                    android:minWidth="@dimen/margin_64"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/exActivitiesLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_2"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_8"
+                android:paddingTop="@dimen/margin_4"
+                android:paddingBottom="@dimen/margin_4"
+                android:paddingRight="@dimen/margin_4"
+                android:text="@string/extra_curricular_activities_label"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/exActivitiesInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/text_size_14"
+                android:text="@{school.extraCurricularActivities}"/>
+
+        </LinearLayout>
+    </ScrollView>
+</layout>
